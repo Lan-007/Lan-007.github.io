@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Blog_Command | Hexo</title>
+  <title>类构造和析构函数存在的隐患及解决方式 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.写文章：&emsp;  hexo new “ ”   创建markdown文件 (在source&#x2F;_posts目录下)&emsp;  然后编辑文章2.本地预览：&emsp;  hexo generate  #生成静态文件&emsp;  hexo server    #启动本地服务器&emsp;  http:&#x2F;&#x2F;localhost:4000 查看效果3.部署：&emsp;  hexo">
+  <meta name="description" content="先看一段程序：1234567891011121314151617181920212223242526272829int main()&#123;  &#123;    cout &lt;&lt; &quot;Starting an inner block.\n&quot;;    StringBad headline1(&quot;Celery Stalks at Midnight&quot;);">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blog_Command">
-<meta property="og:url" content="http://example.com/2025/06/01/Blog-Command/index.html">
+<meta property="og:title" content="类构造和析构函数存在的隐患及解决方式">
+<meta property="og:url" content="http://example.com/2025/06/03/%E7%B1%BB%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E9%9A%90%E6%82%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.写文章：&emsp;  hexo new “ ”   创建markdown文件 (在source&#x2F;_posts目录下)&emsp;  然后编辑文章2.本地预览：&emsp;  hexo generate  #生成静态文件&emsp;  hexo server    #启动本地服务器&emsp;  http:&#x2F;&#x2F;localhost:4000 查看效果3.部署：&emsp;  hexo">
+<meta property="og:description" content="先看一段程序：1234567891011121314151617181920212223242526272829int main()&#123;  &#123;    cout &lt;&lt; &quot;Starting an inner block.\n&quot;;    StringBad headline1(&quot;Celery Stalks at Midnight&quot;);">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-01T06:39:13.000Z">
-<meta property="article:modified_time" content="2025-06-01T07:19:29.031Z">
+<meta property="article:published_time" content="2025-06-03T15:36:18.000Z">
+<meta property="article:modified_time" content="2025-06-04T06:24:59.410Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,28 +154,39 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Blog-Command" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-类构造和析构函数存在的隐患及解决方式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Blog_Command
+      类构造和析构函数存在的隐患及解决方式
     </h1>
   
 
         
-        <a href="/2025/06/01/Blog-Command/" class="archive-article-date">
-  	<time datetime="2025-06-01T06:39:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-01</time>
+        <a href="/2025/06/03/%E7%B1%BB%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E9%9A%90%E6%82%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2025-06-03T15:36:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><mark>1.写文章：</mark><br>&emsp;  hexo new “ ”   创建markdown文件 (在source&#x2F;_posts目录下)<br>&emsp;  然后编辑文章<br><mark>2.本地预览：</mark><br>&emsp;  hexo generate  #生成静态文件<br>&emsp;  hexo server    #启动本地服务器<br>&emsp;  <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000</a> 查看效果<br><mark>3.部署：</mark><br>&emsp;  hexo clean    #清理缓存文件<br>&emsp;  hexo generate #重新生成静态文件<br>&emsp;  hexo deploy   #部署到github</p>
-<h3 id="我使用的批处理文件："><a href="#我使用的批处理文件：" class="headerlink" title="我使用的批处理文件："></a>我使用的批处理文件：</h3><p>.&#x2F;preview.bat<br>.&#x2F;deploy.bat</p>
+        <h3 id="先看一段程序："><a href="#先看一段程序：" class="headerlink" title="先看一段程序："></a>先看一段程序：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Starting an inner block.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">StringBad <span class="title">headline1</span><span class="params">(<span class="string">&quot;Celery Stalks at Midnight&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">StringBad <span class="title">headline2</span><span class="params">(<span class="string">&quot;Lettuce Prey&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">StringBad <span class="title">sports</span><span class="params">(<span class="string">&quot;Spinach Leaves Bowl for Dollars&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">callme1</span>(headline1);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;headline1: &quot;</span> &lt;&lt; headline1 &lt;&lt; endl;              <span class="comment">//按引用传递</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">callme2</span>(headline2);                                      <span class="comment">//按值传递后，复制的对象被销毁</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;headline2: &quot;</span> &lt;&lt; headline2 &lt;&lt; endl;              <span class="comment">//此时headline2内容是随机的</span></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Initialize one object to another: \n&quot;</span>;</span><br><span class="line">    StringBad sailor = sports;   <span class="comment">// StringBad sailor = StringBad(const StringBad &amp; sports)</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;sailor: &quot;</span> &lt;&lt; sailor &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Assign one object to another: \n&quot;</span>;</span><br><span class="line">    StringBad knot;</span><br><span class="line">    knot = headline1;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;knot: &quot;</span> &lt;&lt; knot &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Existing the block.\n&quot;</span>;</span><br><span class="line">   &#125;                            <span class="comment">/*离开后，按栈的顺序销毁对象，但是只能删除两个，因为其它对象全部被析构函数分解*/</span></span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;End of the main()&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><ol>
+<li>程序会调用默认复制构造函数或赋值运算符，并自动销毁地址</li>
+<li>类对象被销毁时，对应的字符串地址内存被释放</li>
+<li>赋值运算符、默认构造函数之间的区别</li>
+</ol>
+<hr>
+<h3 id="解决方式："><a href="#解决方式：" class="headerlink" title="解决方式："></a>解决方式：</h3><ol>
+<li>定义一个显式复制构造函数 –&gt;  <code>StringBad::StringBad(const StringBad &amp;s)</code></li>
+<li>定义一个赋值运算符定义&emsp;–&gt;</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">StringBad&amp; StringBad::<span class="keyword">operator</span>=(<span class="type">const</span> StringBad &amp;st)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span> == &amp; st)</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">delete</span> [] str;</span><br><span class="line">  str = <span class="keyword">new</span> <span class="type">char</span> [st.len + <span class="number">1</span>];</span><br><span class="line">  std::<span class="built_in">strcpy</span>(str, st.str);</span><br><span class="line">  <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><mark>注：二者都使用深度复制，即逐个复制字符，而不是直接复制地址(strcpy)</mark><br>3. 将已有的对象赋给另一个对象时，使用重载的赋值运算符：<br>  <code> arr1 = arr2</code><br>4. 初始化对象时，可能使用赋值运算符：<br>  <code>StringBad arr1 = arr2 </code><br><mark>注：初始化总会使用复制构造函数，而使用&#x3D;运算符时也允许调用赋值运算符<br></mark></p>
 
       
 
@@ -255,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/06/01/Blog-Command/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/06/03/%E7%B1%BB%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E9%9A%90%E6%82%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,18 +280,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2025/06/03/%E7%B1%BB%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E7%9A%84%E9%9A%90%E6%82%A3%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          类构造和析构函数存在的隐患及解决方式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2025/05/26/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87Blog/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我的第一篇Blog</div>
+    <a href="/2025/06/01/Blog-Command/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Blog_Command</div>
       <i class="icon-circle-right"></i>
     </a>
   
